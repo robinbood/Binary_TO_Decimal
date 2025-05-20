@@ -5,17 +5,16 @@ const App = () => {
   const [decimal, setDecimal] = useState(0)
   const [error, setError] = useState("")
 
-  setTimeout(() => {
-    setError("")
-  }, 10000)
+  
+  
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const message = value.match(/^[01]+$/)
+    const message = value.matchAll(/^[01]+$/)
     if (!value) {
       setError("Please enter a value")
     }
-    if (!message) {
+    if (message === null) {
       setError("  0s and 1s only #_#")
       setTimeout(() => {
         setError("Come On! It's just 0s and 1s")
@@ -23,8 +22,13 @@ const App = () => {
       setTimeout(() => {
         setError("Do better ay")
       }, 7000)
+      setTimeout(() => {
+        setError("")
+      },10000)
+      
 
     }
+
 
     const digit: number = value.split('').map(Number).reverse().reduce((acc, curr, index): number => { return acc + curr * Math.pow(2, index) })
     setDecimal(digit)
